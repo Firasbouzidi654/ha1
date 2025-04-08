@@ -87,8 +87,77 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
-
-
     //TODO hier weitere Tests erstellen
+
+
+    //Teil 1 :
+    //Green's
+
+
+
+    @Test
+    @DisplayName("should change positive number to negative")
+    void testToggleToNegative() {
+        var c1 = new Calculator();
+
+        c1.pressDigitKey(5);
+        c1.pressNegativeKey();
+
+        String expected = "-5";
+        String actual = c1.readScreen();
+
+        assertEquals(expected, actual);
+    }
+    //Extra
+    @Test
+    @DisplayName("should display result after adding two negativ multi-digit numbers")
+    void test2() {
+        var c1 = new Calculator();
+        c1.pressDigitKey(5);
+        c1.pressNegativeKey();
+        c1.pressBinaryOperationKey("-");
+        c1.pressDigitKey(5);
+        c1.pressEqualsKey();
+
+        String expected = "-10";
+        String actual = c1.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+
+    //Teil 2 :
+    //Red's
+    @Test
+    @DisplayName("should calculate percentage of a multi-digit number correctly")
+    void test3() {
+        var c1 = new Calculator();
+        c1.pressDigitKey(6);
+        c1.pressDigitKey(0);
+        c1.pressDigitKey(0);
+        c1.pressBinaryOperationKey("%");
+        c1.pressEqualsKey();
+
+        String expected = "6";
+        String actual = c1.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("should calculate reciprocal using 1/x key")
+    void test4() {
+        var c1 = new Calculator();
+        c1.pressDigitKey(1);
+        c1.pressDigitKey(0);
+        c1.pressDigitKey(0);
+        c1.pressBinaryOperationKey("1/x");
+
+
+        String expected = "0.01";
+        String actual = c1.readScreen();
+
+        assertEquals(expected, actual);
+    }
 }
 
