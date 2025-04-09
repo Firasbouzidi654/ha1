@@ -92,54 +92,67 @@ class CalculatorTest {
 
 
 
-
-
     //Teil 1 :
     //Green's
-
-
     @Test
-    @DisplayName("should change positive number to negative")
-    void Test1_Green() {
-        var c1 = new Calculator();
-
+    @DisplayName("should correctly change the sign of the  number ")
+    void Green1_testNegativeNumber() {
+        var  c1 = new Calculator();
         c1.pressDigitKey(5);
         c1.pressNegativeKey();
 
         String expected = "-5";
         String actual = c1.readScreen();
-
         assertEquals(expected, actual);
+
     }
+
 
     //Teil 2 :
-    //Red's
+    //RED's 
     @Test
-    @DisplayName("should calculate percentage of a multi-digit number correctly")
-    void test1_red() {
+    @DisplayName("should repeat last operation when pressing equals multiple times")
+    void testRED_testRepeatedEqualsOperation() {
         var c1 = new Calculator();
-        c1.pressDigitKey(6);
-        c1.pressDigitKey(0);
-        c1.pressDigitKey(0);
-        c1.pressBinaryOperationKey("%");
-        String expected = "6";
-        String actual = c1.readScreen();
 
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    @DisplayName("should calculate reciprocal using 1/x key")
-    void test2_Red() {
-        var c1 = new Calculator();
         c1.pressDigitKey(1);
         c1.pressDigitKey(0);
-        c1.pressDigitKey(0);
-        c1.pressBinaryOperationKey("1/x");
-        String expected = "0.01";
+        c1.pressBinaryOperationKey("-");
+        c1.pressDigitKey(2);
+        c1.pressEqualsKey(); // Calculation interne : 10 - 2 = 8
+        c1.pressEqualsKey(); // interne : 8 - 2 = 6
+        c1.pressEqualsKey(); // Final Result : 6 - 2 = 4
+
+
+        String expected = "4";
         String actual = c1.readScreen();
+        assertEquals(expected, actual);
+    }
+    @Test
+    @DisplayName("should calculate percentage even after an operation")
+    void testRED_testPercentageAfterBinaryOperation() {
+        var C1 = new Calculator();
+
+        C1.pressDigitKey(2);
+        C1.pressDigitKey(0);
+        C1.pressBinaryOperationKey("x");
+        C1.pressDigitKey(1);
+        C1.pressDigitKey(0); // Interne : 20 x 10 = 200
+        C1.pressUnaryOperationKey("%"); // 20 * 0.1 = 2
+        C1.pressEqualsKey(); // Ergebnis : 2
+
+        String expected = "2";
+        String actual = C1.readScreen();
 
         assertEquals(expected, actual);
     }
+
+
+
+
+
+
+
+
 }
 
