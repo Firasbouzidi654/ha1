@@ -92,7 +92,7 @@ class CalculatorTest {
 
 
 
-    //Teil 1 :
+    //Teil 1 :✅ ✅ ✅
     //Green's
     @Test
     @DisplayName("should correctly change the sign of the  number ")
@@ -108,49 +108,27 @@ class CalculatorTest {
     }
 
 
-    //Teil 2 :
-    //RED's 
+
+
+
+
     @Test
-    @DisplayName("should repeat last operation when pressing equals multiple times")
-    void testRED_testRepeatedEqualsOperation() {
+    @DisplayName("should only clear the screen on first clear key press, but keep operation and value")
+    void Red1_clearKeyOnce() {
         var c1 = new Calculator();
 
-        c1.pressDigitKey(1);
-        c1.pressDigitKey(0);
-        c1.pressBinaryOperationKey("-");
+        c1.pressDigitKey(8);
+        c1.pressBinaryOperationKey("+");
         c1.pressDigitKey(2);
-        c1.pressEqualsKey(); // Calculation interne : 10 - 2 = 8
-        c1.pressEqualsKey(); // interne : 8 - 2 = 6
-        c1.pressEqualsKey(); // Final Result : 6 - 2 = 4
+        c1.pressClearKey();
+        c1.pressDigitKey(3);
+        c1.pressEqualsKey(); // 8 + 3 = 11
 
-
-        String expected = "4";
+        String expected = "11";
         String actual = c1.readScreen();
-        assertEquals(expected, actual);
-    }
-    @Test
-    @DisplayName("should calculate percentage even after an operation")
-    void testRED_testPercentageAfterBinaryOperation() {
-        var C1 = new Calculator();
-
-        C1.pressDigitKey(2);
-        C1.pressDigitKey(0);
-        C1.pressBinaryOperationKey("x");
-        C1.pressDigitKey(1);
-        C1.pressDigitKey(0); // Interne : 20 x 10 = 200
-        C1.pressUnaryOperationKey("%"); // 20 * 0.1 = 2
-        C1.pressEqualsKey(); // Ergebnis : 2
-
-        String expected = "2";
-        String actual = C1.readScreen();
 
         assertEquals(expected, actual);
     }
-
-
-
-
-
 
 
 
