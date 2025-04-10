@@ -35,7 +35,8 @@ public class Calculator {
     public void pressDigitKey(int digit) {
         if (digit > 9 || digit < 0) throw new IllegalArgumentException();
 
-        if (screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
+        if (screen.equals("0") || latestValue == Double.parseDouble(screen))
+            screen = "";
         screen = screen + digit;
 
         wasClearedOnce = false; //EXtra
@@ -138,7 +139,12 @@ public class Calculator {
      * Wurde zuvor eine binäre Operationstaste gedrückt und zwei Operanden eingegeben, wird das
      * Ergebnis der Operation angezeigt. Falls hierbei eine Division durch Null auftritt, wird "Error" angezeigt.
      */
+    //Intitale bleibt leerer  String
     public void pressEqualsKey() {
+        if (latestOperation.equals("")) return; //  NE FAIS RIEN si aucune opération , finito
+
+
+
         var result = switch (latestOperation) {
             case "+" -> latestValue + Double.parseDouble(screen);
             case "-" -> latestValue - Double.parseDouble(screen);

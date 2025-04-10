@@ -110,8 +110,8 @@ class CalculatorTest {
 
 
 
-
-
+        //Red's
+// First
     @Test
     @DisplayName("should only clear the screen on first clear key press, but keep operation and value")
     void Red1_clearKeyOnce() {
@@ -120,7 +120,7 @@ class CalculatorTest {
         c1.pressDigitKey(8);
         c1.pressBinaryOperationKey("+");
         c1.pressDigitKey(2);
-        c1.pressClearKey();
+        c1.pressClearKey();// Scrren :0
         c1.pressDigitKey(3);
         c1.pressEqualsKey(); // 8 + 3 = 11
 
@@ -130,6 +130,15 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
+
+    @Test
+    @DisplayName("should do nothing when equals is pressed without an operation")
+    void Red2_EqualsWithoutOperation() {
+        var c1 = new Calculator();
+        c1.pressDigitKey(7);
+        c1.pressEqualsKey();  // aucune opération
+        assertEquals("7", c1.readScreen());
+    }
 
 
 }
